@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ReadBookOnline</string>
+    <string name="home">TRANG CHỦ</string>
+    <string name="category">THỂ LOẠI</string>
+    <string name="bookmark">THEO DÕI</string>
+    <string name="account">TÀI KHOẢN</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_hint">Tìm kiếm truyện</string>
 </resources>
