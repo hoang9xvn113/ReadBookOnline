@@ -45,6 +45,14 @@ public class ContentActivity extends AppCompatActivity {
         control();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, InfoBookActivity.class);
+        intent.putExtra("book_id", book_id);
+        intent.putExtra("account_id", account_id);
+        startActivity(intent);
+    }
+
     void loadingData(int book_id, int book_chapter){
         String url = "https://hochoihamhoc.000webhostapp.com/getContent.php?book_id=+"+book_id + "&chapter="+book_chapter;
 

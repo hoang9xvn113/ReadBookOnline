@@ -88,7 +88,7 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
         holder.book_name.setText(data_holder_filter.get(position).getName());
         holder.book_author.setText("Tác giả: " + data_holder_filter.get(position).getAuthor());
         holder.book_status.setText("Trạng thái: " + data_holder_filter.get(position).getStatus());
-        holder.book_amount.setText("Số chương: "+data_holder_filter.get(position).getAmount() + " chương");
+        holder.book_amount.setText("Số trang: "+data_holder_filter.get(position).getAmount() + " trang");
 
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
