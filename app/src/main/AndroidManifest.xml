@@ -14,7 +14,7 @@
         <activity android:name=".Activities.RegisterActivity"/>
         <activity android:name=".Activities.ContentActivity"/>
         <activity android:name=".Activities.MainActivity"/>
-        <activity android:name=".Activities.ChapterActivity"/>
+        <activity android:name=".Activities.PageActivity"/>
         <activity android:name=".Activities.InfoAppActivity"/>
         <activity android:name=".Activities.SearchBookActivity"/>
         <activity android:name=".Activities.SettingActivity"/>

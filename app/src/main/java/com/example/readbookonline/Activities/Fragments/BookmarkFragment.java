@@ -57,9 +57,9 @@ public class BookmarkFragment extends Fragment {
                         String name = book.getString("name");
                         String author = book.getString("author");
                         String status = book.getString("status");
-                        String chapter_curr = book.getString("chapter_curr");
+                        String page_curr = book.getString("page_curr");
                         int img = Integer.parseInt(book.getString("img"));
-                        data_holder.add(new Book(id,name,author,status,chapter_curr,img));
+                        data_holder.add(new Book(id,name,author,status,page_curr,img));
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -71,7 +71,7 @@ public class BookmarkFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "ERROR2", Toast.LENGTH_SHORT).show();
+
             }
         });
         requestQueue.add(request);

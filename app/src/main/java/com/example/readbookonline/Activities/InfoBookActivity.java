@@ -1,27 +1,21 @@
 package com.example.readbookonline.Activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -37,7 +31,7 @@ public class InfoBookActivity extends AppCompatActivity {
 
     RelativeLayout chaplist_infostr;
     String account_id;
-    int book_id, max_chapter, status_bookmark,chapter_curr=1;
+    int book_id, max_page, status_bookmark,page_curr=1;
     RequestQueue requestQueue,requestStatusBookmark, requestSaveChapterCurr;
     TextView txt_content,book_author,book_status,book_amount, book_name, txt_chaplist;
     ImageView book_img;
@@ -72,9 +66,9 @@ public class InfoBookActivity extends AppCompatActivity {
                         String author = response.getString("author");book_author.setText("Tác giả: "+author);
                         String status = response.getString("status");book_status.setText("Trạng thái: "+status);
                         String amount = response.getString("amount");book_amount.setText("Số trang: "+amount);
-                        max_chapter = Integer.parseInt(amount);
+                        max_page = Integer.parseInt(amount);
                         txt_chaplist.setText(txt_chaplist.getText() + "Trang  " + amount);
-                        chapter_curr = Integer.parseInt(response.getString("chapter_curr"));
+                        page_curr = Integer.parseInt(response.getString("page_curr"));
                         status_bookmark = Integer.parseInt(response.getString("status_bookmark"));
                         String des = response.getString("des");txt_content.setText(des);
                         DataImage dataImage = new DataImage();
@@ -87,7 +81,7 @@ public class InfoBookActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(InfoBookActivity.this, "ERROR2", Toast.LENGTH_LONG).show();
+                Toast.makeText(InfoBookActivity.this, "Lỗi mạng", Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(request);
@@ -114,8 +108,8 @@ public class InfoBookActivity extends AppCompatActivity {
         requestStatusBookmark.add(stringRequest);
     }
 
-    void saveChapterCurr(int chapter){
-        String url = "https://hochoihamhoc.000webhostapp.com/saveChapterCurr.php?book_id=+" + book_id + "&account_id=" + account_id + "&chapter="+ chapter;
+    void saveChapterCurr(int page){
+        String url = "https://hochoihamhoc.000webhostapp.com/saveChapterCurr.php?book_id=+" + book_id + "&account_id=" + account_id + "&page="+ page;
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -160,9 +154,9 @@ public class InfoBookActivity extends AppCompatActivity {
         chaplist_infostr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ChapterActivity.class);
+                Intent intent = new Intent(v.getContext(), PageActivity.class);
                 intent.putExtra("book_id", book_id);
-                intent.putExtra("book_amount", max_chapter);
+                intent.putExtra("book_amount", max_page);
                 intent.putExtra("account_id", account_id);
                 v.getContext().startActivity(intent);
             }
@@ -180,16 +174,16 @@ public class InfoBookActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_readnow:
                         intent.putExtra("book_id", book_id);
-                        intent.putExtra("book_chapter",1);
-                        intent.putExtra("book_amount", max_chapter);
+                        intent.putExtra("book_page",1);
+                        intent.putExtra("book_amount", max_page);
                         intent.putExtra("account_id", account_id);
                         saveChapterCurr(1);
                         startActivity(intent);
                         break;
                     case R.id.nav_readcon:
                         intent.putExtra("book_id", book_id);
-                        intent.putExtra("book_chapter",chapter_curr);
-                        intent.putExtra("book_amount", max_chapter);
+                        intent.putExtra("book_page",page_curr);
+                        intent.putExtra("book_amount", max_page);
                         intent.putExtra("account_id", account_id);
                         startActivity(intent);
                         break;

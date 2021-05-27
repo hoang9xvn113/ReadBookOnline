@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,10 +27,10 @@ public class ContentActivity extends AppCompatActivity {
 
     TextView book_content;
     int book_id;
-    int book_chapter;
-    RequestQueue requestQueue,requestSaveChapterCurr;
+    int book_page;
+    RequestQueue requestQueue,requestSavePageCurr;
     BottomNavigationView bottom_nav;
-    int max_chapter, min_chapter=1;
+    int max_page, min_page=1;
     String account_id;
 
     @Override
@@ -41,7 +38,7 @@ public class ContentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
         mapping();
-        loadingData(book_id, book_chapter);
+        loadingData(book_id, book_page);
         control();
     }
 
@@ -53,8 +50,8 @@ public class ContentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    void loadingData(int book_id, int book_chapter){
-        String url = "https://hochoihamhoc.000webhostapp.com/getContent.php?book_id=+"+book_id + "&chapter="+book_chapter;
+    void loadingData(int book_id, int book_page){
+        String url = "https://hochoihamhoc.000webhostapp.com/getContent.php?book_id=+"+book_id + "&page="+book_page;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -80,16 +77,16 @@ public class ContentActivity extends AppCompatActivity {
         book_content = findViewById(R.id.book_content);
         bottom_nav = findViewById(R.id.bottom_nav);
         
-        //Nhận giá trị từ ChapterActivity hoặc InfoBookActivity
+        //Nhận giá trị từ PageActivity hoặc InfoBookActivity
         Intent intent = this.getIntent();
         book_id = intent.getIntExtra("book_id",1);
-        max_chapter = intent.getIntExtra("book_amount", 1);
-        book_chapter = intent.getIntExtra("book_chapter", 1);
+        max_page = intent.getIntExtra("book_amount", 1);
+        book_page = intent.getIntExtra("book_page", 1);
         account_id = intent.getStringExtra("account_id");
 
         //request Json
         requestQueue = Volley.newRequestQueue(this);
-        requestSaveChapterCurr = Volley.newRequestQueue(this);
+        requestSavePageCurr = Volley.newRequestQueue(this);
     }
     
     void control(){
@@ -99,28 +96,28 @@ public class ContentActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Intent intent = new Intent();
                 switch (item.getItemId()){
-                    case R.id.chapter_prev:
-                        if (book_chapter > min_chapter) {
+                    case R.id.page_prev:
+                        if (book_page > min_page) {
                             intent.setClass(ContentActivity.this, ContentActivity.class);
-                            intent.putExtra("book_chapter", book_chapter - 1);
-                            intent.putExtra("book_amount", max_chapter);
+                            intent.putExtra("book_page", book_page - 1);
+                            intent.putExtra("book_amount", max_page);
                         } else {
                             return true;
                         }
                         break;
-                    case R.id.chapter_next:
-                        if (book_chapter < max_chapter) {
+                    case R.id.page_next:
+                        if (book_page < max_page) {
                             intent.setClass(ContentActivity.this, ContentActivity.class);
-                            intent.putExtra("book_chapter", book_chapter + 1);
-                            intent.putExtra("book_amount", max_chapter);
-                            saveChapterCurr(book_chapter +1);
+                            intent.putExtra("book_page", book_page + 1);
+                            intent.putExtra("book_amount", max_page);
+                            savePageCurr(book_page +1);
                         } else {
                             return true;
                         }
                         break;
-                    case R.id.chapter_list:
-                        intent.setClass(ContentActivity.this, ChapterActivity.class);
-                        intent.putExtra("book_amount", max_chapter);
+                    case R.id.page_list:
+                        intent.setClass(ContentActivity.this, PageActivity.class);
+                        intent.putExtra("book_amount", max_page);
                         break;
                 }
                 intent.putExtra("book_id", book_id);
@@ -133,8 +130,8 @@ public class ContentActivity extends AppCompatActivity {
 
     }
 
-    void saveChapterCurr(int chapter){
-        String url = "https://hochoihamhoc.000webhostapp.com/saveChapterCurr.php?book_id=+" + book_id + "&account_id=" + account_id + "&chapter="+ chapter;
+    void savePageCurr(int page){
+        String url = "https://hochoihamhoc.000webhostapp.com/savePageCurr.php?book_id=+" + book_id + "&account_id=" + account_id + "&page="+ page;
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -146,6 +143,6 @@ public class ContentActivity extends AppCompatActivity {
 
             }
         });
-        requestSaveChapterCurr.add(request);
+        requestSavePageCurr.add(request);
     }
 }

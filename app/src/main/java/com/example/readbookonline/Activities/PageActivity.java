@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -18,7 +16,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.readbookonline.R;
@@ -29,12 +26,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ChapterActivity extends AppCompatActivity {
+public class PageActivity extends AppCompatActivity {
      ListView chaplist;
      int book_id, book_amount;
      ArrayList<String> list;
      RequestQueue queue;
-     RequestQueue requestSaveChapterCurr;
+     RequestQueue requestSavePageCurr;
      ArrayAdapter<String> arrayAdapter;
      String account_id;
      SearchView action_search;
@@ -42,7 +39,7 @@ public class ChapterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chapter);
+        setContentView(R.layout.activity_page);
         mapping();
         loadingData();
         control();
@@ -53,7 +50,7 @@ public class ChapterActivity extends AppCompatActivity {
 
     void loadingData (){
 
-        String url = "https://hochoihamhoc.000webhostapp.com/getChapters.php?book_id="+ book_id ;
+        String url = "https://hochoihamhoc.000webhostapp.com/getPages.php?book_id="+ book_id ;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -62,14 +59,14 @@ public class ChapterActivity extends AppCompatActivity {
                         for(int i=0; i<response.length();i++){
                             try {
                                 JSONObject item = response.getJSONObject(i);
-                                String chapter = item.getString("chapter");
-                                list.add("Trang "+chapter);
+                                String page = item.getString("page");
+                                list.add("Trang "+page);
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(ChapterActivity.this, "Error1", Toast.LENGTH_LONG);
+                                Toast.makeText(PageActivity.this, "Error1", Toast.LENGTH_LONG);
                             }
                         }
-                        arrayAdapter = new ArrayAdapter<String>(ChapterActivity.this ,android.R.layout.simple_list_item_1, list);
+                        arrayAdapter = new ArrayAdapter<String>(PageActivity.this ,android.R.layout.simple_list_item_1, list);
                         chaplist.setAdapter(arrayAdapter);
 
 
@@ -77,7 +74,7 @@ public class ChapterActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ChapterActivity.this, "Error2", Toast.LENGTH_LONG);
+                Toast.makeText(PageActivity.this, "Error2", Toast.LENGTH_LONG);
             }
         }
         );
@@ -97,7 +94,7 @@ public class ChapterActivity extends AppCompatActivity {
 
         //Request Json
         queue = Volley.newRequestQueue(this);
-        requestSaveChapterCurr = Volley.newRequestQueue(this);
+        requestSavePageCurr = Volley.newRequestQueue(this);
     }
 
     void control(){
@@ -121,20 +118,20 @@ public class ChapterActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String chap = (String)chaplist.getItemAtPosition(position);
-                Intent intent = new Intent(ChapterActivity.this, ContentActivity.class);
-                intent.putExtra("book_chapter", Integer.parseInt(chap.substring(6)));
+                Intent intent = new Intent(PageActivity.this, ContentActivity.class);
+                intent.putExtra("book_page", Integer.parseInt(chap.substring(6)));
                 intent.putExtra("book_id", book_id);
                 intent.putExtra("book_amount", book_amount);
                 intent.putExtra("account_id", account_id);
-                saveChapterCurr(Integer.parseInt(chap.substring(6)));
+                savePageCurr(Integer.parseInt(chap.substring(6)));
                 finish();
                 startActivity(intent);
             }
         });
     }
 
-    void saveChapterCurr(int chapter){
-        String url = "https://hochoihamhoc.000webhostapp.com/saveChapterCurr.php?book_id=+" + book_id + "&account_id=" + account_id + "&chapter="+ chapter;
+    void savePageCurr(int page){
+        String url = "https://hochoihamhoc.000webhostapp.com/savePageCurr.php?book_id=+" + book_id + "&account_id=" + account_id + "&page="+ page;
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -146,7 +143,7 @@ public class ChapterActivity extends AppCompatActivity {
 
             }
         });
-        requestSaveChapterCurr.add(request);
+        requestSavePageCurr.add(request);
     }
 }
 
