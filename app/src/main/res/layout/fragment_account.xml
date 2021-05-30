@@ -82,7 +82,7 @@
             <TextView
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
-                android:text="Cài Đặt"
+                android:text="Thông tin tài khoản"
                 android:textSize="18sp"
                 android:layout_marginLeft="25dp"
                 />

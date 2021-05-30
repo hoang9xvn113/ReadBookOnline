@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.readbookonline.Activities.InfoAccount;
 import com.example.readbookonline.Activities.InfoAppActivity;
 import com.example.readbookonline.Activities.SigninActivity;
 import com.example.readbookonline.R;
@@ -73,11 +74,13 @@ public class AccountFragment extends Fragment {
     }
 
     void control(){
-        //Hiện thị cài đặt
+        //Hiển thị thông tin tài khoản
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Tính năng này sẽ sớm được cập nhật", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), InfoAccount.class);
+                intent.putExtra("account_id", account_id);
+                startActivity(intent);
             }
         });
 

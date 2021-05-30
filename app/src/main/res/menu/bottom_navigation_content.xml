@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Trước"
+    <item android:title=""
         android:id="@+id/page_prev"
-        android:icon="@drawable/ic_arrow_left_content"/>
-    <item android:title="DS Trang"
+        android:icon="@drawable/ic_arrow_left_content" />
+    <item android:title=""
         android:id="@+id/page_list"
         android:icon="@drawable/ic_article_content"/>
-    <item android:title="Tiếp"
+    <item android:title=""
         android:id="@+id/page_next"
         android:icon="@drawable/ic_arrow_right_content"/>
-
+    <item android:title=""
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_baseline_settings_24"/>
 </menu>

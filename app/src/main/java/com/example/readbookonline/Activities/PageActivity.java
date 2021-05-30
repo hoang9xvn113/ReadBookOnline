@@ -35,6 +35,9 @@ public class PageActivity extends AppCompatActivity {
      ArrayAdapter<String> arrayAdapter;
      String account_id;
      SearchView action_search;
+     int text_size;
+     int background_color;
+     int text_color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,9 @@ public class PageActivity extends AppCompatActivity {
         book_id = getIntent().getIntExtra("book_id", 1);
         book_amount = getIntent().getIntExtra("book_amount", 1);
         account_id = getIntent().getStringExtra("account_id");
+        text_size = getIntent().getIntExtra("text_size", 18);
+        background_color = getIntent().getIntExtra("background_color", R.color.dark_gray);
+        text_color = getIntent().getIntExtra("text_color", R.color.dark);
 
         //Ánh xạ
         list = new ArrayList<String>();
@@ -123,6 +129,9 @@ public class PageActivity extends AppCompatActivity {
                 intent.putExtra("book_id", book_id);
                 intent.putExtra("book_amount", book_amount);
                 intent.putExtra("account_id", account_id);
+                intent.putExtra("background_color", background_color);
+                intent.putExtra("text_color", text_color);
+                intent.putExtra("text_size", text_size);
                 savePageCurr(Integer.parseInt(chap.substring(6)));
                 finish();
                 startActivity(intent);

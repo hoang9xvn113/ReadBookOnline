@@ -32,6 +32,9 @@ public class ContentActivity extends AppCompatActivity {
     BottomNavigationView bottom_nav;
     int max_page, min_page=1;
     String account_id;
+    int text_size;
+    int background_color;
+    int text_color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +86,19 @@ public class ContentActivity extends AppCompatActivity {
         max_page = intent.getIntExtra("book_amount", 1);
         book_page = intent.getIntExtra("book_page", 1);
         account_id = intent.getStringExtra("account_id");
+        text_size = intent.getIntExtra("text_size", 18);
+        background_color = intent.getIntExtra("background_color", R.color.dark_gray);
+        text_color = intent.getIntExtra("text_color", R.color.dark);
+
 
         //request Json
         requestQueue = Volley.newRequestQueue(this);
         requestSavePageCurr = Volley.newRequestQueue(this);
+
+        //Thiết lập thuộc tính
+        book_content.setTextColor(getResources().getColor(text_color));
+        book_content.setBackgroundColor(getResources().getColor(background_color));
+        book_content.setTextSize(text_size);
     }
     
     void control(){
@@ -100,7 +112,6 @@ public class ContentActivity extends AppCompatActivity {
                         if (book_page > min_page) {
                             intent.setClass(ContentActivity.this, ContentActivity.class);
                             intent.putExtra("book_page", book_page - 1);
-                            intent.putExtra("book_amount", max_page);
                         } else {
                             return true;
                         }
@@ -109,7 +120,7 @@ public class ContentActivity extends AppCompatActivity {
                         if (book_page < max_page) {
                             intent.setClass(ContentActivity.this, ContentActivity.class);
                             intent.putExtra("book_page", book_page + 1);
-                            intent.putExtra("book_amount", max_page);
+
                             savePageCurr(book_page +1);
                         } else {
                             return true;
@@ -117,17 +128,22 @@ public class ContentActivity extends AppCompatActivity {
                         break;
                     case R.id.page_list:
                         intent.setClass(ContentActivity.this, PageActivity.class);
-                        intent.putExtra("book_amount", max_page);
                         break;
+                    case R.id.setting:
+                        intent.setClass(ContentActivity.this, SettingActivity.class);
+                        intent.putExtra("book_page", book_page);
                 }
                 intent.putExtra("book_id", book_id);
+                intent.putExtra("book_amount", max_page);
                 intent.putExtra("account_id", account_id);
+                intent.putExtra("background_color", background_color);
+                intent.putExtra("text_color", text_color);
+                intent.putExtra("text_size", text_size);
                 finish();
                 startActivity(intent);
                 return true;
             }
         });
-
     }
 
     void savePageCurr(int page){
