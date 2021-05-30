@@ -6,7 +6,7 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/img"
+        android:src="@drawable/bi_mat_cua_may_man"
         android:id="@+id/book_img"
         android:contentDescription="@string/app_name" />
     <TextView

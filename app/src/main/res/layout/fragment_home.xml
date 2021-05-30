@@ -42,7 +42,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Truyện mới cập nhật"
+            android:text="Sách mới cập nhật"
             android:textStyle="bold"
             android:textSize="20sp"
             android:paddingVertical="10dp"

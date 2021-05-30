@@ -31,5 +31,11 @@ public class DataImage {
         list_image[18] = R.drawable.day_con_lam_giau;
         list_image[19] = R.drawable.nha_dau_tu_thong_minh;
         list_image[20] = R.drawable.soi_gia_pho_wall;
+        list_image[21] = R.drawable.bien_nien_co_don;
+        list_image[22] = R.drawable.tram_nam_co_don;
+        list_image[23] = R.drawable.khoi_nghiep_ban_le;
+        list_image[24] = R.drawable.anh1;
+        list_image[25] = R.drawable.anh2;
+        list_image[26] = R.drawable.anh4;
     }
 }
