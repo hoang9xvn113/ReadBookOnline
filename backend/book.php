@@ -26,6 +26,7 @@
     <a class='btn' href="book_add.php">Thêm sách mới</a>
     <table border="1">  
         <tr>
+            <th>STT</th>
             <th>Tên sách</th>
             <th>Tác giả</th>
             <th>Thể loại</th>
@@ -43,8 +44,10 @@
             $select_account = "select book.id, book.name, author, category.name as category, status, amount, description, update_at from book, category where category_id = category.id order by update_at desc" ;
             $result = $db->select($select_account);
             if ($result != false){
+                $i=1;
                 while($row = $result->fetch_assoc()){
                     echo "<tr>";
+                    echo "<td>" . $i . "</td>";
                     echo "<td>" . $row['name'] . "</td>";
                     echo "<td>" . $row['author'] . "</td>";
                     echo "<td>" . $row['category'] . "</td>";
@@ -54,6 +57,7 @@
                     echo "<td>" . $row['update_at'] . "</td>";
                     echo "<td><a href='book_update.php?book_id=" . $row['id'] . "' class='btn'>Sửa thông tin sách</a><a href='book_add_content.php?book_id=".  $row['id'] ."' class='btn'>Thêm nội dung sách</a></td>";
                     echo "</tr>";
+                    $i++;
                 }
             }
         ?>

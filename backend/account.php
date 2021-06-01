@@ -24,30 +24,14 @@
 
     <div id="tab_1">
         <table border="1">  
-            <tr><th>Tên người dùng</th><th>Tên tài khoản</th><th>Mật khẩu</th><th>Email</th></tr>  
+            <tr><th>STT</th></th><th>Tên người dùng</th><th>Tên tài khoản</th><th>Mật khẩu</th><th>Email</th></tr>  
             <tbody>
-                
+                <?php include_once('getAccount.php') ?>
             
-            <?php
-                include_once "database.php";
-                
-                $db = new Database();
-                
-                $select_account = "select * from account";
-                $result = $db->select($select_account);
-                if ($result != false){
-                    while($row = $result->fetch_assoc()){
-                        echo "<tr>";
-                        echo "<td>" . $row['name'] . "</td>";
-                        echo "<td>" . $row['user'] . "</td>";
-                        echo "<td>" . $row['password'] . "</td>";
-                        echo "<td>" . $row['email'] . "</td>";
-                        echo "</tr>";
-                    }
-                }
-            ?>
+
                 </tbody>
             </table>  
         </div id="tab_2">
+        <h2>Tổng số tài khoản đã đăng ký là: <?php echo $i-1 ?></h2>
 </body>
 </html>

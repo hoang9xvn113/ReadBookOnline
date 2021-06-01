@@ -20,17 +20,19 @@
             $des = $_GET['des'];
         }
         
-        if ($book_id != ""){
+        if ($book_id != "" && $name != "" && $author != "" && $category != "" && $des != ""){
             $update_book = "update book set name='$name', author='$author', category_id=$category, description='$des' where id = $book_id";
             $result = $db->update($update_book);
             echo "<h1>";
             if ($result){
                 echo "Cập nhật thành công";
             } else {
-                echo "Cập nhật thất bại";
+                echo "Tên sách bị trùng vui lòng cập nhật lại";
             }
             echo "</h1>";
             echo "<a href='https://hochoihamhoc.000webhostapp.com/'>Trở lại trang chủ</a>";
+        } else {
+            echo "Vui lòng nhập đầy đủ thông tin";
         }
 
     }

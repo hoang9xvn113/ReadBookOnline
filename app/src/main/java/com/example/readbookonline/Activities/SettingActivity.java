@@ -62,7 +62,10 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ContentActivity.class);
-                text_size = Integer.parseInt(edt_textS.getText().toString());
+                if (!edt_textS.getText().toString().equals("")){
+                    text_size = Integer.parseInt(edt_textS.getText().toString());
+                }
+
                 background_color = getBackground_color(spinner.getSelectedItem().toString());
                 text_color = getTextColor(spinner.getSelectedItem().toString());
                 intent.putExtra("book_id", book_id);

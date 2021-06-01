@@ -120,7 +120,6 @@ public class ContentActivity extends AppCompatActivity {
                         if (book_page < max_page) {
                             intent.setClass(ContentActivity.this, ContentActivity.class);
                             intent.putExtra("book_page", book_page + 1);
-
                             savePageCurr(book_page +1);
                         } else {
                             return true;

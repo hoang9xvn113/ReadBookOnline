@@ -44,7 +44,8 @@
     <div >
         <form action="addBook_control.php">
             <input type="text" name="book_id" value="<?php echo $book_id ?>" hidden><br>
-            Tên trang: <?php echo $page ?><br>
+            Tên trang: 
+            <input type="text" name="page" value="<?php echo $page ?>" placeholder="Trang"><br>
             Nội dung:
             <input type="text" name="content" placeholder="Thêm nội dung"><br>
             <input class="btn" type="submit" value="Thêm">

@@ -11,7 +11,7 @@
    <link rel="stylesheet" href="./assets/Fonts/themify-icons/themify-icons.css">
 </head>
 
-<body>
+<body style="background-image: url('https://lh4.googleusercontent.com/ph9_9cJnJEUsFacvkn9SNKn8La1Vvq23_JJMX6RhFp5whO07r-QPxld2EGOIzMWvJ1aky4p4qNOt8Q44zJBFZ-komn1qaMiO-tNFqjlKh7bQ5Zqt_RBMNshFYKZhHNa13POgMtUE');>
     <div id="main">
         <div id="header">
             <!-- Begin: nav -->
@@ -23,7 +23,7 @@
         </div>    
 </div>
 
-<h1>Đây là trang chủ</h1>
+<h1 style="margin-top: 200px;text-align: center;">Quản lý app đọc sách online</h1>
 
 </body>
 </html>
